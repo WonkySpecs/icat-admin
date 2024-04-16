@@ -3,6 +3,6 @@
   package = "netlify-plugin-cypress"
 
 [[redirects]]
-  from = "/*"
+  from = "/icat"
   to = "/"
-  status = 301
+  status = 200
