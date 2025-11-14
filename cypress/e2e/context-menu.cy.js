@@ -30,7 +30,7 @@ describe('Open many-one related works', () => {
 describe('Data publication links work', () => {
   it('passes', () => {
     cy.openEntityByTyping('DataPublication');
-    cy.get('[class*="entityRow"]').first().rightclick();
+    cy.get('[class*="entityRow"]').first().rightclick({force: true});
     cy.get('li[class*="contextMenuRow"]')
       .then(rows => {
         const numRows = rows.length;
