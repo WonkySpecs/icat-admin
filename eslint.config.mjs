@@ -12,18 +12,12 @@ export default defineConfig([
     },
 
     rules: {
-      "prefer-template": "off",
-      radix: "off",
-
       // Turned off in favour of the typescript version, which understands
       // function type declarations
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": ["error", {
         argsIgnorePattern: "^_",
       }],
-
-      "react/jsx-tag-spacing": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "jest/no-deprecated-functions": "off",
     },
   }]);
