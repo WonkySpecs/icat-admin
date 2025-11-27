@@ -1,7 +1,6 @@
 import {defineConfig, globalIgnores} from "eslint/config";
 import reactHooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
-import tsParser from "@typescript-eslint/parser";
 
 export default defineConfig([
   globalIgnores(["**/build/"]),
@@ -9,7 +8,7 @@ export default defineConfig([
   tseslint.configs.recommended,
   {
     languageOptions: {
-      parser: tsParser,
+      parser: tseslint.parser
     },
 
     rules: {
