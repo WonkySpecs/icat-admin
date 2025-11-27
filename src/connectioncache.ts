@@ -13,6 +13,8 @@
  *     lastActiveConnection: id of the last opened connection. Automatically
  *                           tries to reconnect on refresh
  *     connections: array of the individual connections
+ *     serverNames: array of servers which have been logged into. Displayed
+ *                  in dropdown on home page
  * }
  */
 
@@ -50,6 +52,7 @@ type StorageConnection = Connection & {
 }
 type StoredConnections = {
     lastActiveConnection?: string
+    serverNames: string[]
     connections: StorageConnection[]
 }
 
@@ -70,10 +73,15 @@ export function saveLogin(toSave: Connection) {
             sessionId: toSave.sessionId,
             username: toSave.username
         };
+    const isNewServer = !state.serverNames.includes(toSave.server);
+    const serverNames = isNewServer
+        ? [...state.serverNames, toSave.server]
+        : state.serverNames;
 
     const newState = {
         lastActiveConnection: matching.id,
-        connections: [...unchanged, matching]
+        connections: [...unchanged, matching],
+        serverNames
     };
 
     save(newState);
@@ -108,13 +116,14 @@ export function getLastLogin() {
 }
 
 export function getServerNames() {
-    return load().connections.map(c => c.server);
+    return load().serverNames;
 }
 
 function load() {
     const res = localStorage.getItem("icat-admin-connections");
     if (res === null) return {
-        connections: []
+        connections: [],
+        serverNames: []
     };
     return JSON.parse(res) as StoredConnections;
 }
