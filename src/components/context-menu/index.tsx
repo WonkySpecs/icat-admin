@@ -72,8 +72,9 @@ const ContextMenu = ({
         if (!filterComponents) {
             console.warn(`Unknown relationship ${k}`);
             return {
-                // Little hack to ensure we don't ever use the cached non-result
-                queryKey: [Math.random().toString()],
+                // Little hack to ensure we don't use the cached non-result
+                // for anything 'real'
+                queryKey: ["failed-filter-lookup"],
                 queryFn: async () => 0
             };
         }
