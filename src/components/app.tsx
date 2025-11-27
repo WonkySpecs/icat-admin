@@ -46,7 +46,7 @@ const App = () => {
         if (store.activePage !== undefined) return;
         if (store.connections.length > 0) return;
         const login = getLastLogin();
-        if (login === null || login.sessionId == undefined) return;
+        if (login === undefined) return;
         isValidSession(login)
             .then(res => {
                 if (res) createConnection(login)
