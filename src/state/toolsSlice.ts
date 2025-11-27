@@ -3,6 +3,9 @@ import {ExistingIcatEntity} from "../types";
 
 export type Tool = "MoveRuns";
 
+/**
+ * Beginning and end (inclusive) of a contiguous set of runs
+ */
 export type RunRange = {
     start: number
     end: number
