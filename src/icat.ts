@@ -89,13 +89,11 @@ class IcatClient {
                 {username},
                 {password}]
         };
-        const form = new FormData();
-        form.append('json', JSON.stringify(creds));
         const url = new URL("icat/session", this.hostUrl).toString();
         return fetch(
             url, {
                 method: "POST",
-                body: new URLSearchParams(form as any),
+                body: new URLSearchParams([['json', JSON.stringify(creds)]]),
             })
             .then(res => res.ok
                 ? res
@@ -154,14 +152,14 @@ class IcatClient {
     async writeEntity(
         entityType: string, entity: ExistingIcatEntity | NewIcatEntity)
         : Promise<number[]> {
-        const form = new FormData();
-        form.append('entities', JSON.stringify({[entityType]: entity}));
-        form.append('sessionId', this.sessionId || "");
         return fetch(
             new URL("icat/entityManager", this.hostUrl).toString(),
             {
                 method: "POST",
-                body: new URLSearchParams(form as any),
+                body: new URLSearchParams([
+                    ['entities', JSON.stringify({[entityType]: entity})],
+                    ['sessionId', this.sessionId || ""]
+                ]),
             })
             .then(res => res.ok
                 ? res
