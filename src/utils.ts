@@ -99,6 +99,13 @@ export function difference<T>(set: Set<T>, other: Iterable<T>): Set<T> {
     return diff;
 }
 
+/**
+ * Returns a copy of an array with the element at idx i replaced with t
+ * @example
+ * const a = ["a", "b", "c"];
+ * const r = withReplaced(a, "x", 1);
+ * // r is ["a", "x", "c"];
+ */
 export function withReplaced<T>(a: T[], t: T, i: number): T[] {
     return a.slice(0, i).concat(t).concat(a.slice(i + 1));
 }
@@ -106,6 +113,14 @@ export function withReplaced<T>(a: T[], t: T, i: number): T[] {
 /**
  * Generate an array of contiguous integers, like a basic version of python's
  * range function.
+ * @example
+ * ```
+ * const r = range(3);
+ * // r is [0, 1, 2]
+ *
+ * const r2 = range(2, 5);
+ * //r2 is [2, 3, 4]
+ * ```
  *
  * @param a Exclusive top of the range if only argument, or the bottom of the
  * range if b is also specified.
@@ -132,8 +147,8 @@ export function serialize(entity: ExistingIcatEntity | NewIcatEntity) {
                     return [k, v];
                 }
 
-                // Accepts date formats the don't specify milliseconds, and
-                // converts to one that does because ICAT requires it.
+                // Accepts date formats that don't specify milliseconds, and
+                // converts to one that does, because ICAT requires it
                 const asDate = parseDate(v);
                 if (asDate.isValid()) {
                     return [k, inIcatFormat(asDate)];
