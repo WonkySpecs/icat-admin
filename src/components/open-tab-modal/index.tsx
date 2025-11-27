@@ -2,7 +2,7 @@ import {entityNames, IcatEntityName} from '../../icatEntityStructure';
 
 import {useEffect, useRef, useState} from "preact/hooks";
 import style from './style.module.css';
-import {TargetedEvent} from "react";
+import {TargetedEvent} from "preact";
 
 const MAX_MATCHES = 20;
 
