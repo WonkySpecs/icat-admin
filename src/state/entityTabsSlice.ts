@@ -1,11 +1,13 @@
 import {StateCreator} from "zustand/vanilla";
 import {
-    EntityTabState,
-    ExistingIcatEntity, IcatEntity,
+    ExistingIcatEntity,
+    IcatEntity,
     IcatEntityValue,
+    NewIcatEntity,
     TableFilter
 } from "../types";
 import {difference, withReplaced} from "../utils";
+import {EntityModification} from "../components/entity-table/row";
 
 type EntityTabsState = {
     tabs: EntityTabState[]
@@ -42,6 +44,20 @@ type EntityTabsActions = {
         id: number,
         k: string,
         v: string | number | { id: number }) => void
+}
+
+/**
+ * The state for a single tab within an EntityBrowser
+ */
+type EntityTabState = {
+    key: number
+    filter: TableFilter,
+    data?: ExistingIcatEntity[],
+    errMsg?: string,
+    creations: NewIcatEntity[],
+    deletions: Set<number>,
+    modifications?: { [id: number]: EntityModification },
+    showAllColumns: boolean
 }
 
 export type EntityTabsSlice = EntityTabsState & EntityTabsActions;

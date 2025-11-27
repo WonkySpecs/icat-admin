@@ -1,19 +1,4 @@
-import {EntityModification} from "./components/entity-table/row";
 import {IcatEntityName} from "./icatEntityStructure";
-
-/**
- * All the state for a single tab within an EntityBrowser
- */
-export type EntityTabState = {
-    key: number
-    filter: TableFilter,
-    data?: ExistingIcatEntity[],
-    errMsg?: string,
-    creations: NewIcatEntity[],
-    deletions: Set<number>,
-    modifications?: {[id: number]: EntityModification},
-    showAllColumns: boolean
-}
 
 /**
  * The filter which defines the data that should be fetched for an entity tab
