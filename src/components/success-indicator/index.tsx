@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "preact/hooks";
 
 import style from './style.module.css';
 import LoadingIndicator from "../generic/loading-indicator";
+import {Tooltip} from "../generic/tooltip";
 
 const INTERVAL_MS = 10
 
@@ -65,14 +66,11 @@ const SuccessIndicator = ({saveState, clearTimeoutMs = 2000}: Props) => {
             {icon}
         </span>
             {mousePos !== null && saveState.failed &&
-              <div
-                class={style.messageContainer}
-                style={{
-                    top: mousePos.y,
-                    left: mousePos.x
-                }}>
-                  {saveState.error?.message}
-              </div>}
+              <Tooltip
+                x={mousePos.x}
+                y={mousePos.y}
+                content={saveState.error?.message ?? "Unknown error"}/>
+            }
         </>
     );
 }

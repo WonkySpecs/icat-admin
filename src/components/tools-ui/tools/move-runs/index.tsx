@@ -16,6 +16,8 @@ import {JSX} from "preact";
 import IcatClient from "../../../../icat";
 import {WithSuffix} from "../../../generic/with-indicator";
 import {useConnectionStore} from "../../../../state/stores";
+import {Tooltip} from "../../../generic/tooltip";
+import {ReactNode} from "preact/compat";
 
 type Props = {
     icatClient: IcatClient
@@ -220,8 +222,8 @@ const SelectedRuns = (
             .filter(r => r !== undefined);
         if (results.length === 0) return undefined;
         const dfsFound = results.filter(r => r.isSuccess)
-            .map(r => r.data?.length ?? 0)
-            .reduce((a, b) => a + b, 0)
+            .map(r => r.data ?? [])
+            .reduce((a, b) => a.concat(b), [])
         const countPending = results.filter(r => r.isPending)
             .length;
         return {
@@ -238,7 +240,7 @@ const SelectedRuns = (
         const rows: (string | JSX.Element)[] = [header];
         // If no instrument has been defined, there won't be any query results
         if (content !== undefined) {
-            rows.push(content.dfsFound + " datafiles");
+            rows.push(content.dfsFound.length + " datafiles");
             if (content.countPending > 0) {
                 const total = (rr.end - rr.start + 1);
                 const s = "Searched " + (total - content.countPending) + "/" + total;
@@ -246,9 +248,32 @@ const SelectedRuns = (
                     <WithSuffix suffix={<LoadingIndicator/>}>{s}</WithSuffix>);
             }
         }
+
+        const makeToolTip = () => {
+            // Don't display tooltip if there are no files
+            const dfs = content?.dfsFound ?? [];
+            if (dfs.length === 0) return undefined;
+
+            // If there are 20 or more files, display a shortened list
+            const shortenedLength = 10;
+            const shortened = dfs.length < 20
+                ? dfs
+                : dfs.slice(0, shortenedLength / 2)
+                    .concat([{
+                        id: -1,
+                        name: "... (+" + (dfs.length - shortenedLength) + " files)"
+                    }])
+                    .concat(dfs.slice(dfs.length - shortenedLength / 2));
+
+            return shortened.map(df => df.name.toString())
+                .map(n => <p style={{margin: "1px"}} key={n}>{n}</p>);
+        }
+
         return <Card
             close={() => removeRunRange({start: rr.start, end: rr.end})}
-            rows={rows}/>
+            rows={rows}
+            tooltip={makeToolTip()}
+        />
     }
 
     const sorted = [...runRanges];
@@ -376,29 +401,47 @@ const InvestigationSelector = (
 const Card = (
     {
         close,
-        rows
+        rows,
+        tooltip
     }: {
         close: () => void,
-        rows: (string | JSX.Element)[]
+        rows: (string | JSX.Element)[],
+        tooltip?: ReactNode
     }) => {
+    const [mousePos, setMousePos] = useState<{
+        x: number,
+        y: number
+    } | undefined>(undefined);
+
     const closeOnMiddleClick = (ev: MouseEvent) => {
         if (ev.buttons == 4) {
             ev.stopPropagation();
             close()
         }
     };
+
     return <div
         onMouseDown={closeOnMiddleClick}
+        onMouseMove={ev => setMousePos({
+            x: ev.x + 10, y: ev.y - 10
+        })}
+        onMouseLeave={() => setMousePos(undefined)}
         class={style.moveRunsCard}>
+
         <div class={style.moveRunsCardContent}>
             {rows.map((r, i) => <div key={i}>{r}</div>)}
         </div>
+
         <CloseButton
             onClickHandler={close}
             additionalClass={style.closeButton}
             lineColour="black"
             fillColour="white"
         />
+
+        {tooltip && mousePos &&
+          <Tooltip x={mousePos.x} y={mousePos.y} content={tooltip}/>
+        }
     </div>
 }
 
