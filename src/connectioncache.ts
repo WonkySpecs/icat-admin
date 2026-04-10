@@ -24,29 +24,6 @@ export type Connection = {
     username: string;
 }
 
-if (typeof window === 'undefined') {
-    global.localStorage = {
-        _data: {},
-        setItem(id, val) {
-            this._data[id] = val;
-        },
-        // Using id => this._data[id] instead of function syntax breaks the prod build
-        getItem(id) {
-            return this._data[id]
-        },
-        removeItem(id) {
-            return delete this._data[id];
-        },
-        clear() {
-            this._data = {};
-        },
-        length: 0,
-        key(n: number) {
-            return this._data.keys[n]
-        }
-    };
-}
-
 type StorageConnection = Connection & {
     id: string
 }

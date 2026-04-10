@@ -3,7 +3,7 @@
         "noImplicitAny": true,
         "target": "ES2020",
         "useDefineForClassFields": true,
-        "module": "ESNext",
+        "module": "NodeNext",
         "lib": ["ES2020", "DOM", "DOM.Iterable"],
         "skipLibCheck": true,
         "paths": {
@@ -12,7 +12,7 @@
         },
 
         /* Bundler mode */
-        "moduleResolution": "node",
+        "moduleResolution": "node16",
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
