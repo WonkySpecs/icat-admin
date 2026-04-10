@@ -54,11 +54,25 @@ const MoveRunsTool = (
         : runNumbers.map(r => {
             const where = "name like '" + state.instrument + "%" + r + "%'";
             const f = tableFilter("Datafile", 0, 0, where);
+            /*
+            Filter applied to names of returned datafiles to ensure we only
+            include files with precisely the matching run number, not everything
+            it prefixes or suffixes (e.g. if r is 20 files for runs 200 and 120
+            are both returned by the query, but we don't want them).
+
+            We have to do this after fetching because jpql isn't expressive
+            enough to include it in the where clause
+             */
+            const patt = state.instrument + "0*" + r + "[^\\d]";
+            const re = new RegExp(patt);
+
             return {
                 queryKey: [icatClient, f],
                 // TODO: filter with regex to name = <instr>0*<run>\D+
                 queryFn: async ({signal}: { signal: AbortSignal }) =>
-                    await icatClient.getEntries(f, signal)
+                    await (icatClient.getEntries(f, signal)
+                        .then(es => es.filter(df =>
+                            typeof df.name == "string" && re.test(df.name))))
             }
         })
 
