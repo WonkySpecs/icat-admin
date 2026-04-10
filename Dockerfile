@@ -3,7 +3,9 @@ FROM node:24-alpine AS development
 WORKDIR /app
 
 COPY package.json yarn.lock vite.config.mts tsconfig.json /app/
-copy src /app/src
+COPY src /app/src
+
+ENV NODE_ENV=production
 
 RUN yarn install
 RUN yarn build
