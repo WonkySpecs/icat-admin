@@ -477,7 +477,7 @@
   dependencies:
     vary "^1.1.2"
 
-"@preact/preset-vite@^2.9.0":
+"@preact/preset-vite@^2.10.5":
   version "2.10.5"
   resolved "https://registry.yarnpkg.com/@preact/preset-vite/-/preset-vite-2.10.5.tgz#a0c332d42ad3471bb84310a5b270326115cfa301"
   integrity sha512-p0vJpxiVO7KWWazWny3LUZ+saXyZKWv6Ju0bYMWNJRp2YveufRPgSUB1C4MTqGJfz07EehMgfN+AJNwQy+w6Iw==
@@ -678,7 +678,7 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.97.0.tgz#538c66b9290cd57771c2e198c9d8f89d89299943"
   integrity sha512-QdpLP5VzVMgo4VtaPppRA2W04UFjIqX+bxke/ZJhE5cfd5UPkRzqIAJQt9uXkQJjqE8LBOMbKv7f8HCsZltXlg==
 
-"@tanstack/react-query@^5.90.11":
+"@tanstack/react-query@^5.97.0":
   version "5.97.0"
   resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.97.0.tgz#0df5f6320a4b62ae8ed5042bb59166b6426624ad"
   integrity sha512-y4So4eGcQoK2WVMAcDNZE9ofB/p5v1OlKvtc1F3uqHwrtifobT7q+ZnXk2mRkc8E84HKYSlAE9z6HXl2V0+ySQ==
@@ -1492,7 +1492,7 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-dayjs@^1.10.4, dayjs@^1.11.3:
+dayjs@^1.10.4, dayjs@^1.11.20:
   version "1.11.20"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.20.tgz#88d919fd639dc991415da5f4cb6f1b6650811938"
   integrity sha512-YbwwqR/uYpeoP4pu043q+LTDLFBLApUP6VxRihdfNTqu4ubqMlGDLd6ErXhEgsyvY0K6nCs7nggYumAN+9uEuQ==
@@ -3315,7 +3315,7 @@ postcss@^8.5.6:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-preact@^10.23.2:
+preact@^10.29.1:
   version "10.29.1"
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.29.1.tgz#2a5b936efe91cfe1e773cdb55dceb55d148d1d4b"
   integrity sha512-gQCLc/vWroE8lIpleXtdJhTFDogTdZG9AjMUpVkDf2iTCNwYNWA+u16dL41TqUDJO4gm2IgrcMv3uTpjd4Pwmg==
@@ -4211,7 +4211,7 @@ zimmerframe@^1.1.4:
   resolved "https://registry.yarnpkg.com/zod/-/zod-4.3.6.tgz#89c56e0aa7d2b05107d894412227087885ab112a"
   integrity sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==
 
-zustand@^5.0.4:
+zustand@^5.0.12:
   version "5.0.12"
   resolved "https://registry.yarnpkg.com/zustand/-/zustand-5.0.12.tgz#ed36f647aa89965c4019b671dfc23ef6c6e3af8c"
   integrity sha512-i77ae3aZq4dhMlRhJVCYgMLKuSiZAaUPAct2AksxQ+gOtimhGMdXljRT21P5BNpeT4kXlLIckvkPM029OljD7g==
