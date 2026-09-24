@@ -6,7 +6,7 @@
 
  /* eslint quote-props: 0 */
 
-export const entityNames = ["Affiliation", "Application", "DataCollection", "DataCollectionDatafile", "DataCollectionDataset", "DataCollectionInvestigation", "DataCollectionParameter", "DataPublication", "DataPublicationDate", "DataPublicationFunding", "DataPublicationType", "DataPublicationUser", "Datafile", "DatafileFormat", "DatafileParameter", "Dataset", "DatasetInstrument", "DatasetParameter", "DatasetTechnique", "DatasetType", "Facility", "FacilityCycle", "FundingReference", "Grouping", "Instrument", "InstrumentScientist", "Investigation", "InvestigationFacilityCycle", "InvestigationFunding", "InvestigationGroup", "InvestigationInstrument", "InvestigationParameter", "InvestigationType", "InvestigationUser", "Job", "Keyword", "ParameterType", "PermissibleStringValue", "PublicStep", "Publication", "RelatedDatafile", "RelatedItem", "Rule", "Sample", "SampleParameter", "SampleType", "Shift", "Study", "StudyInvestigation", "Technique", "User", "UserGroup"] as const;
+export const entityNames = ["Affiliation", "Application", "DataCollection", "DataCollectionDatafile", "DataCollectionDataset", "DataCollectionInvestigation", "DataCollectionParameter", "DataPublication", "DataPublicationDate", "DataPublicationFunding", "DataPublicationType", "DataPublicationUser", "Datafile", "DatafileFormat", "DatafileParameter", "Dataset", "DatasetInstrument", "DatasetParameter", "DatasetTechnique", "DatasetType", "Facility", "FacilityCycle", "FundingReference", "Grouping", "Instrument", "InstrumentScientist", "Investigation", "InvestigationFacilityCycle", "InvestigationFunding", "InvestigationGroup", "InvestigationInstrument", "InvestigationParameter", "InvestigationType", "InvestigationUser", "Job", "Keyword", "ParameterType", "PermissibleStringValue", "PublicStep", "Publication", "RelatedDatafile", "RelatedItem", "Rule", "Sample", "SampleParameter", "SampleType", "Shift", "Study", "StudyInvestigation", "Subject", "Technique", "User", "UserGroup"] as const;
 export type IcatEntityName = typeof entityNames[number];
 
 type RelatedEntityField = { name: string; type: IcatEntityName; }
@@ -192,6 +192,7 @@ export const entityStructures: EntityStructureMap = {
             "createTime",
             "description",
             "id",
+            "internalId",
             "modId",
             "modTime",
             "pid",
@@ -211,6 +212,10 @@ export const entityStructures: EntityStructureMap = {
             {
                 "name": "relatedItems",
                 "type": "RelatedItem"
+            },
+            {
+                "name": "subjects",
+                "type": "Subject"
             },
             {
                 "name": "users",
@@ -651,6 +656,7 @@ export const entityStructures: EntityStructureMap = {
     },
     "FundingReference": {
         "attributes": [
+            "acknowledgement",
             "awardNumber",
             "awardTitle",
             "createId",
@@ -703,12 +709,14 @@ export const entityStructures: EntityStructureMap = {
             "createId",
             "createTime",
             "description",
+            "endDate",
             "fullName",
             "id",
             "modId",
             "modTime",
             "name",
             "pid",
+            "startDate",
             "type",
             "url"
         ],
@@ -1348,6 +1356,28 @@ export const entityStructures: EntityStructureMap = {
             {
                 "name": "study",
                 "type": "Study"
+            }
+        ]
+    },
+    "Subject": {
+        "attributes": [
+            "classificationCode",
+            "createId",
+            "createTime",
+            "id",
+            "modId",
+            "modTime",
+            "name",
+            "pid",
+            "schemeURI",
+            "subjectScheme",
+            "valueURI"
+        ],
+        "manys": [],
+        "ones": [
+            {
+                "name": "dataPublication",
+                "type": "DataPublication"
             }
         ]
     },
