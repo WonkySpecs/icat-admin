@@ -17,7 +17,7 @@ describe('Open one-many related works', () => {
 describe('Open many-one related works', () => {
   it('passes', () => {
     cy.openEntityByTyping('Instrument');
-    cy.get('[class*="entityRow"]').first().rightclick({force: true});
+    cy.get('[class*="entityRow"]').first().rightclick();
     cy.get('div[class*="contextMenu"]').contains('facility').click();
     // Close the instrument tab so we can easily get the filter input of the new tab
     cy.get('[class*="entityTab"] button').first().trigger('mousedown', {buttons: 4});
@@ -30,7 +30,7 @@ describe('Open many-one related works', () => {
 describe('Data publication links work', () => {
   it('passes', () => {
     cy.openEntityByTyping('DataPublication');
-    cy.get('[class*="entityRow"]').first().rightclick({force: true});
+    cy.get('[class*="entityRow"]').first().rightclick();
     cy.get('li[class*="contextMenuRow"]')
       .then(rows => {
         const numRows = rows.length;
