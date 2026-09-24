@@ -65,7 +65,7 @@ const MoveRunsTool = (
             We have to do this after fetching because jpql isn't expressive
             enough to include it in the where clause
              */
-            const patt = state.instrument + "0*" + r + "[^\\d]";
+            const patt = state.instrument + "0*" + r + "\\D";
             const re = new RegExp(patt);
 
             return {
